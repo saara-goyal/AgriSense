@@ -1,0 +1,95 @@
+
+{% extends 'layout.html' %}
+{% block body %}
+
+<style>
+    html body {
+        background-color: rgb(206, 206, 228);
+    }
+
+    .crop-form {
+        max-width: 420px;
+        margin: 30px auto;
+        padding: 20px;
+        color: black;
+    }
+
+    .crop-form .form-group {
+        margin-bottom: 16px;
+    }
+</style>
+
+<br>
+<h2 style="text-align:center; color:black;">
+    <b>AgriSense – Smart Crop Recommendation</b>
+</h2>
+
+<div class="crop-form">
+    <form method="POST" action="{{ url_for('crop_prediction') }}">
+
+        <div class="form-group">
+            <label for="nitrogen"><b>Nitrogen (N)</b></label>
+            <input type="number" step="any" min="0"
+                   class="form-control" id="nitrogen"
+                   name="nitrogen" placeholder="Example: 90" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phosphorous"><b>Phosphorus (P)</b></label>
+            <input type="number" step="any" min="0"
+                   class="form-control" id="phosphorous"
+                   name="phosphorous" placeholder="Example: 42" required>
+        </div>
+
+        <div class="form-group">
+            <label for="pottasium"><b>Potassium (K)</b></label>
+            <input type="number" step="any" min="0"
+                   class="form-control" id="pottasium"
+                   name="pottasium" placeholder="Example: 43" required>
+        </div>
+
+        <div class="form-group">
+            <label for="temperature"><b>Temperature (°C)</b></label>
+            <input type="number" step="any"
+                   class="form-control" id="temperature"
+                   name="temperature" placeholder="Example: 25" required>
+        </div>
+
+        <div class="form-group">
+            <label for="humidity"><b>Humidity (%)</b></label>
+            <input type="number" step="any" min="0" max="100"
+                   class="form-control" id="humidity"
+                   name="humidity" placeholder="Example: 80" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ph"><b>Soil pH</b></label>
+            <input type="number" step="any" min="0" max="14"
+                   class="form-control" id="ph"
+                   name="ph" placeholder="Example: 6.5" required>
+        </div>
+
+        <div class="form-group">
+            <label for="rainfall"><b>Rainfall (mm)</b></label>
+            <input type="number" step="any" min="0"
+                   class="form-control" id="rainfall"
+                   name="rainfall" placeholder="Example: 202" required>
+        </div>
+
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-info"
+                    style="color:black; font-weight:bold; width:150px; height:50px;">
+                Predict
+            </button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
